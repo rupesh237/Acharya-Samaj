@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Notices</title>
+  <style>
+    body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the navigation bar */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+            justify-content: center;
+            display: flex;
+        }
+
+        /* Style the links inside the navigation bar */
+        nav a {
+            float: left;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the color of links on hover */
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+
+    /* Style the notice list */
+    .notice-list {
+      width: 600px;
+      margin: 0 auto;
+      padding: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .notice-list h2 {
+      margin-top: 0;
+    }
+
+    .notice-list ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .notice-list li {
+      margin-bottom: 16px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 16px;
+    }
+
+    .notice-list li:last-child {
+      border-bottom: none;
+    }
+
+    .notice-list h3 {
+      margin-top: 0;
+    }
+
+    .notice-list p {
+      margin-top: 8px;
+    }
+
+    /* Style the footer */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 16px;
+    }
+  </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav>
+      <a href="{% url 'index' %}">Home</a>
+      <a href="{% url 'notice' %}">Notice</a>
+      <a href="{% url 'contact' %}">Contact</a>
+      <a href="{% url 'about' %}">About Us</a>
+  </nav>
+
+  <!-- Notice list -->
+  <div class="notice-list">
+    <h2>Notices</h2>
+    <ul>
+      <li>
+        <h3>Notice 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget est euismod, aliquet velit vel, suscipit nisi. Sed eget velit id libero pretium lacinia.</p>
+      </li>
+      <li>
+        <h3>Notice 2</h3>
+        <p>Phasellus bibendum, leo ac gravida suscipit, leo dolor gravida neque, vel blandit orci arcu vel lacus. Nullam vel aliquet orci.</p>
+      </li>
+      <li>
+        <h3>Notice 3</h3>
+        <p>Suspendisse potenti. Morbi ac nisi vel arcu dignissim ultrices. Nunc eget ante quis ipsum pulvinar convallis.</p>
+      </li>
+      <li>
+        <h3>Notice 4</h3>
+        <p>Integer lacinia, odio a semper ultricies, ipsum velit ullamcorper massa, euismod consectetur mi ex eu libero.</p>
+      </li>
+      <li>
+        <h3>Notice 5</h3>
+        <p>Vivamus eget enim euismod, malesuada quam sit amet, sollicitudin purus. Suspendisse potenti. Sed nec enim auctor, vestibulum sapien a, bibendum libero.</p>
+      </li>
+      <li>
+        <h3>Notice 6</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget est euismod, aliquet velit vel, suscipit nisi. Sed eget velit id libero pretium lacinia.</p>
+      </li>
+      <li>
+        <h3>Notice 7</h3>
+        <p>Phasellus bibendum, leo ac gravida suscipit, leo dolor gravida neque, vel blandit orci arcu vel lacus. Nullam vel aliquet orci.</p>
+      </li>
+      <li>
+        <h3>Notice 8</h3>
+        <p>Suspendisse potenti. Morbi ac nisi vel arcu dignissim ultrices. Nunc eget ante quis ipsum pulvinar convallis.</p>
+      </li>
+      <li>
+        <h3>Notice 9</h3>
+        <p>Integer lacinia, odio a semper ultricies, ipsum velit ullamcorper massa, euismod consectetur mi ex eu libero.</p>
+      </li>
+      <li>
+        <h3>Notice 10</h3>
+        <p>Vivamus eget enim euismod, malesuada quam sit amet, sollicitudin purus. Suspendisse potenti. Sed nec enim auctor, vestibulum sapien a, bibendum libero.</p>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2023 Acharya-Samaj. All rights reserved.
+  </footer>
+</body>
+</html>

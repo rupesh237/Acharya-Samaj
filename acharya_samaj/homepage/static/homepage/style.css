@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+ul.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f7f4f4;
+  float:right;
+}
+
+ul.navbar li {
+  float: inline-start;
+}
+
+ul.navbar li a {
+  display: block;
+  color: #726f6f;
+  text-align: center;
+  padding: 14px 15px;
+  text-decoration: none;
+}
+
+ul.navbar li a:hover {
+  background-color: #a5a1a1;
+}
+
+/* Add some space for content */
+.content {
+  padding: 20px;
+}
