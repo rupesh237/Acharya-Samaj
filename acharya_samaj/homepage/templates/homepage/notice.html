@@ -7,6 +7,7 @@
     body {
             margin: 0;
             padding: 0;
+            background-color: #f2f2f2;
         }
 
         /* Style the navigation bar */
@@ -15,6 +16,7 @@
             overflow: hidden;
             justify-content: center;
             display: flex;
+            padding: 20px
         }
 
         /* Style the links inside the navigation bar */
@@ -40,6 +42,7 @@
       padding: 16px;
       border: 1px solid #ccc;
       border-radius: 8px;
+      background-color: #F6FCFB;
     }
 
     .notice-list h2 {
@@ -77,6 +80,66 @@
       text-align: center;
       padding: 16px;
     }
+
+
+
+    /* Style the "Join Our Organization" button */
+    .join-button {
+        position: fixed;
+        bottom: 55px;
+        right: 35px;
+        background-color: #333;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .join-button:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    /* Style the membership form */
+    .membership-form {
+        display: none;
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        padding: 20px;
+        background-color: #f2f2f2;
+    }
+
+    /* Style form input fields and button */
+    input[type=text],
+    input[type=email],
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 16px;
+    }
+
+    button {
+        background-color: #333;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+
+
+
   </style>
 </head>
 <body>
@@ -91,49 +154,52 @@
   <!-- Notice list -->
   <div class="notice-list">
     <h2>Notices</h2>
+    {% for notice in notices %}
     <ul>
       <li>
-        <h3>Notice 1</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget est euismod, aliquet velit vel, suscipit nisi. Sed eget velit id libero pretium lacinia.</p>
-      </li>
-      <li>
-        <h3>Notice 2</h3>
-        <p>Phasellus bibendum, leo ac gravida suscipit, leo dolor gravida neque, vel blandit orci arcu vel lacus. Nullam vel aliquet orci.</p>
-      </li>
-      <li>
-        <h3>Notice 3</h3>
-        <p>Suspendisse potenti. Morbi ac nisi vel arcu dignissim ultrices. Nunc eget ante quis ipsum pulvinar convallis.</p>
-      </li>
-      <li>
-        <h3>Notice 4</h3>
-        <p>Integer lacinia, odio a semper ultricies, ipsum velit ullamcorper massa, euismod consectetur mi ex eu libero.</p>
-      </li>
-      <li>
-        <h3>Notice 5</h3>
-        <p>Vivamus eget enim euismod, malesuada quam sit amet, sollicitudin purus. Suspendisse potenti. Sed nec enim auctor, vestibulum sapien a, bibendum libero.</p>
-      </li>
-      <li>
-        <h3>Notice 6</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget est euismod, aliquet velit vel, suscipit nisi. Sed eget velit id libero pretium lacinia.</p>
-      </li>
-      <li>
-        <h3>Notice 7</h3>
-        <p>Phasellus bibendum, leo ac gravida suscipit, leo dolor gravida neque, vel blandit orci arcu vel lacus. Nullam vel aliquet orci.</p>
-      </li>
-      <li>
-        <h3>Notice 8</h3>
-        <p>Suspendisse potenti. Morbi ac nisi vel arcu dignissim ultrices. Nunc eget ante quis ipsum pulvinar convallis.</p>
-      </li>
-      <li>
-        <h3>Notice 9</h3>
-        <p>Integer lacinia, odio a semper ultricies, ipsum velit ullamcorper massa, euismod consectetur mi ex eu libero.</p>
-      </li>
-      <li>
-        <h3>Notice 10</h3>
-        <p>Vivamus eget enim euismod, malesuada quam sit amet, sollicitudin purus. Suspendisse potenti. Sed nec enim auctor, vestibulum sapien a, bibendum libero.</p>
+        <h3>Notice:{{ notice.id }} {{ notice.title }}</h3>
+        <p>{{ notice.description }}</p>
       </li>
     </ul>
+    {% endfor %}
   </div>
+
+  <!-- "Join Our Organization" button -->
+  <button class="join-button" onclick="document.getElementById('membership-form').style.display='block'">
+
+    Join Acharya-Samaj
+
+</button>
+  <div class="membership-form" id="membership-form">
+
+    <h2>Request to join Acharya-Samaj</h2>
+    <form>
+        <label for="name">Name</label>
+
+        <input type="text" id="name" name="name" required>
+
+        <label for="address">Address</label>
+
+        <input type="text" id="address" name="address" required>
+
+        <label for="email">Email</label>
+
+        <input type="email" id="email" name="email" required>
+
+        <label for="passport">Passport Image:</label>
+        <input type="file" id="passport" name="passport" accept="image/*" required> <br>
+
+        <label for="message">Message</label>
+
+        <textarea id="message" name="message"></textarea>
+
+        <button type="submit">Submit</button>
+
+        <!-- Close button -->
+        <button type="button"
+            onclick="document.getElementById('membership-form').style.display='none'">Close</button>
+    </form>
+</div>
 
   <!-- Footer -->
   <footer>

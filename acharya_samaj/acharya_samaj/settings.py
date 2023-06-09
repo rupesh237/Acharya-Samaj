@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,10 @@ SECRET_KEY = 'django-insecure-h)%p^a@3@be%1u!fymlrogw^n2y5pj8j23w@1e7ww4-eqwsi9_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+LOGIN_REDIRECT_URL = '/admin/'
+
 
 
 # Application definition
@@ -106,17 +110,31 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
+
+LANGUAGES = [
+    ('en', _('English')),
+    ('ne', _('Nepali')),
+]
+
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+USE_L10N = True
 
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+
+# Set the directory where translation files will be stored
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
 
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
