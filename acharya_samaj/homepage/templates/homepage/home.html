@@ -1,8 +1,12 @@
+{% load i18n %}
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acharya-Samaj</title>
     <style>
         body {
@@ -16,6 +20,10 @@
             overflow: hidden;
             justify-content: center;
             display: flex;
+            padding: 20px;
+            top: 0;
+            position: sticky;
+            z-index: 100;
         }
 
         /* Style the links inside the navigation bar */
@@ -33,20 +41,105 @@
             color: black;
         }
 
-        /* Style the image gallery container */
-        .image-gallery {
-            width: 100%;
-            height: 400px;
-            overflow-x: scroll;
-            white-space: nowrap;
+
+        .slider{
+            width: 800px;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+        
+        }
+        .slides{
+            width: 500%;
+            height: 500px;
+            display: flex;
+        }
+        
+        .slides input{
+            display: none;
+        
+        }
+        .slide{
+            width: 20%;
+            transition: 2s;
+        }
+        .slide imag{
+            width: 800px;
+            height: 500px;
+        }
+        /* css for manual slide */
+        .navigation-manual{
+            position: absolute;
+            width: 800px;
+            margin-top: -40px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .manual-btn{
+            border: 2px solid  #458377;
+            padding: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 1s;
+        }
+        
+        .manual-btn:not(:last-child){
+            margin-right: 48px;
+        }
+        
+        .manual-btn:hover{
+            background-color: #458377;
+        }
+        
+        #radio1:checked ~ .first{
+            margin-left: 0;
+        }
+        #radio2:checked ~ .first{
+            margin-left: -20%;
+        }
+        #radio3:checked ~ .first{
+            margin-left: -40%;
+        }
+        #radio4:checked ~ .first{
+            margin-left: -60%;
+        }
+        
+        /* css for automatic sliding */
+        .navigation-auto{
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            width: 800px;
+            margin-top: 460px;
+        }
+        
+        .navigation-auto div{
+            border: 2px solid #458377;
+            padding: 5px;
+            border-radius: 10px;
+            transition: 1s;
+        }
+        
+        .navigation-auto div:not(:last-child){
+            margin-right: 48px;
+        
+        }
+        
+        #radio1:checked ~ .navigation-auto .auto-btn1{
+            background: #458377;
+        }
+        
+        #radio2:checked ~ .navigation-auto .auto-btn2{
+            background: #458377;
+        }
+        #radio3:checked ~ .navigation-auto .auto-btn3{
+            background: #458377;
+        }
+        #radio4:checked ~ .navigation-auto .auto-btn4{
+            background: #458377;
         }
 
-        /* Style the images inside the gallery */
-        .image-gallery img {
-            display: inline-block;
-            height: 100%;
-            margin-right: 20px;
-        }
 
         /* Style the organization programs section */
         .programs {
@@ -57,8 +150,8 @@
         /* Style the "Join Our Organization" button */
         .join-button {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 55px;
+            right: 35px;
             background-color: #333;
             color: white;
             padding: 12px 20px;
@@ -107,46 +200,6 @@
             background-color: #ddd;
             color: black;
         }
-
-        .photo-gallery {
-            width: 600px;
-            height: 500px;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-
-        /* Style the photo gallery images */
-        .photo-gallery img {
-            width: 600px;
-            height: 500px;
-        }
-
-        /* Style the photo gallery slideshow */
-        .slideshow {
-            display: flex;
-            transition: transform 1s ease-in-out;
-        }
-
-        /* Style the photo gallery navigation buttons */
-        .nav-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.5);
-            color: black;
-            padding: 12px 16px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .prev-button {
-            left: 0;
-        }
-
-        .next-button {
-            right: 0;
-        }
-
         /* Style the footer */
         footer {
             background-color: #333;
@@ -154,73 +207,90 @@
             text-align: center;
             padding: 16px;
         }
+
     </style>
 </head>
 
 <body>
     <!-- Navigation bar -->
     <nav>
-        <a href="{% url 'index' %}">Home</a>
-        <a href="{% url 'notice' %}">Notice</a>
-        <a href="{% url 'contact' %}">Contact</a>
-        <a href="{% url 'about' %}">About Us</a>
+        <a href="{% url 'index' %}">{% trans 'Home' %}</a>
+        <a href="{% url 'notice' %}">{% trans 'Notices' %}</a>
+        <a href="{% url 'contact' %}">{% trans 'Contact Us' %}</a>
+        <a href="{% url 'about' %}">{% trans 'About Us' %}</a>
+        {% comment %} <div>
+            <form method="POST" action="{% url 'set_language' %}">
+                {% csrf_token %}
+                <select name="language">
+                  {% get_language_info_list for LANGUAGES as languages %}
+                  {% for lang in languages %}
+                    <option value="{{ lang.code }}" {% if lang.code == LANGUAGE_CODE %}selected{% endif %}>
+                      {{ lang.name_local }}
+                    </option>
+                  {% endfor %}
+                </select>
+                <button type="submit">{% trans 'Change Language' %}</button>
+              </form>
+              
+        </div>             {% endcomment %}
     </nav>
 
-    <!-- Photo gallery container -->
-    <div class="photo-gallery">
-        <!-- Photo gallery slideshow -->
-        <div class="slideshow">
-            <img src="#image1.jpg" alt="Image 1">
-            <img src="#image2.jpg" alt="Image 2">
-            <img src="#image3.jpg" alt="Image 3">
-            <img src="#image4.jpg" alt="Image 4">
-            <img src="#image5.jpg" alt="Image 5">
+    <!-- image slider start -->
+    <div class="slider">
+        <div class="slides">
+            <!-- radio buttons start -->
+            <input type="radio" name="radio-btn" id="radio1">
+            <input type="radio" name="radio-btn" id="radio2">
+            <input type="radio" name="radio-btn" id="radio3">
+            <input type="radio" name="radio-btn" id="radio4">
+            <!-- radio buttons end -->
+            <!-- slide images start -->
+            {% for slide in slides %}
+            <div class="slide first">
+                <img src="{{ slide.images.url }}" alt="image">
+            </div>
+            {% endfor %}
+            {% comment %} <div class="slide">
+                <img src="image2.jpg" alt="image">
+            </div>
+            <div class="slide">
+                <img src="image3.jpg" alt="image">
+            </div>
+            <div class="slide">
+                <img src="image4.jpg" alt="image">
+            </div> {% endcomment %}
+
+
+            <!-- slide images end -->
+            <!-- automatic navigation start -->
+            <div class="navigation-auto">
+                <div class="auto-btn1"></div>
+                <div class="auto-btn2"></div>
+                <div class="auto-btn3"></div>
+                <div class="auto-btn4"></div>
+            </div>
+            <!-- automatic navigation end -->
         </div>
-
-        <!-- Photo gallery navigation buttons -->
-        <button class="nav-button prev-button" onclick="prevSlide()">&#10094;</button>
-        <button class="nav-button next-button" onclick="nextSlide()">&#10095;</button>
+        <!-- manual navigation start -->
+        <div class="navigation-manual">
+            <label for="radio1" class="manual-btn"></label>
+            <label for="radio2" class="manual-btn"></label>
+            <label for="radio3" class="manual-btn"></label>
+            <label for="radio4" class="manual-btn"></label>
+        </div>
+        <!-- manual navigation start -->
     </div>
+    <!-- image slider end -->
 
-    <script>
-        var slideIndex = 0;
-        var slides = document.getElementsByClassName("slideshow")[0].getElementsByTagName("img");
-
-        function showSlides() {
-            for (var i = 0; i < slides.length; i++) {
-                slides[i].style.transform = "translateX(" + (i - slideIndex) * 600 + "px)";
+    <script type="text/javascript">
+        var counter=1;
+        setInterval(function(){
+            document.getElementById('radio' + counter).checked= true;
+            counter++;
+            if (counter>4){
+                counter=1;
             }
-
-            slideIndex++;
-
-            if (slideIndex >= slides.length) {
-                slideIndex = 0;
-            }
-
-            setTimeout(showSlides, 1000);
-        }
-
-        function prevSlide() {
-            slideIndex--;
-
-            if (slideIndex < 0) {
-                slideIndex = slides.length - 1;
-            }
-
-            showSlides();
-        }
-
-        function nextSlide() {
-            slideIndex++;
-
-            if (slideIndex >= slides.length) {
-                slideIndex = 0;
-            }
-
-            showSlides();
-        }
-
-        showSlides();
+        }, 2500)
     </script>
 
 
@@ -228,38 +298,58 @@
 
     <!-- Organization programs section -->
     <div class="programs">
-        <h2>Our Programs</h2>
+        <h1>Our Programs</h1>
+        {% for program in programs %}
         <ul>
             <li>
-                <h1>Program1</h1>
+                <h2>Program:{{ program.id }}</h2>
+                <h3> {{ program.title }} </h3>
+
+                <p>{{ program.description }}</p>
+            </li>
+            {% comment %} <li>
+                <h2>Program2</h2>
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed, neque? Quidem molestiae tempore possimus sit obcaecati eum illum quod commodi voluptate odit cumque placeat nemo soluta voluptates id, quasi minima!</p>
             </li>
             <li>
-                <h1>Program2</h1>
+                <h2>Program3</h2>
+
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed, neque? Quidem molestiae tempore possimus sit obcaecati eum illum quod commodi voluptate odit cumque placeat nemo soluta voluptates id, quasi minima!</p>
-            </li>
-            <li>
-                <h1>Program3</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed, neque? Quidem molestiae tempore possimus sit obcaecati eum illum quod commodi voluptate odit cumque placeat nemo soluta voluptates id, quasi minima!</p>
-            </li>
+            </li> {% endcomment %}
         </ul>
+        {% endfor %}
     </div>
 
     <!-- "Join Our Organization" button -->
-    <button class="join-button" onclick="document.getElementById('membership-form').style.display='block'">Join Our
-        Organization</button>
+    <button class="join-button" onclick="document.getElementById('membership-form').style.display='block'">
+
+        Join Acharya-Samaj
+
+    </button>
 
     <!-- Membership form -->
     <div class="membership-form" id="membership-form">
-        <h2>Join Acharya-Samaj</h2>
-        <form>
+        {% csrf_token %}
+
+        <h2>Request to join Acharya-Samaj</h2>
+        <form action="{% url 'home' %}" method="post">
             <label for="name">Name</label>
+
             <input type="text" id="name" name="name" required>
 
+            <label for="address">Address</label>
+
+            <input type="text" id="address" name="address" required>
+
             <label for="email">Email</label>
+
             <input type="email" id="email" name="email" required>
 
+            <label for="passport">Passport/Citizenship/NationalityID:</label>
+            <input type="file" id="passport" name="passport" accept="image/*" required> <br>
+
             <label for="message">Message</label>
+
             <textarea id="message" name="message"></textarea>
 
             <button type="submit">Submit</button>
@@ -272,7 +362,9 @@
 
     <!-- Footer -->
     <footer>
+
         &copy; 2023 Acharya-Samaj. All rights reserved.
+
     </footer>
 </body>
 
