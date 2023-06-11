@@ -12,7 +12,7 @@ class Slider(models.Model):
         return self.title
 
 
-class Program(models.Model):
+class Programs(models.Model):
     title= models.CharField(max_length=200, blank=False)
     description= tinymce_model.HTMLField(blank=False)
     images=models.ImageField(blank=True, upload_to='Programs/images/')
@@ -22,7 +22,7 @@ class Program(models.Model):
         return f"{self.title} {self.images}"
 
 
-class Notice(models.Model):
+class Notices(models.Model):
     title= models.CharField(max_length=100, blank=False)
     description= tinymce_model.HTMLField(blank=False)
     images=models.ImageField(blank=True, upload_to='notices/images/')
@@ -43,7 +43,7 @@ class MessageOfBOD(models.Model):
         return f"{self.name} ({self.post})"
 
 
-class Service(models.Model):
+class Services(models.Model):
     title= models.CharField(max_length=60, blank=False)
     description= tinymce_model.HTMLField(blank=False)
     images= models.ImageField(upload_to='Services/images/', blank=True)

@@ -14,12 +14,12 @@ class SliderAdmin(admin.ModelAdmin):
 
 
 
-from .models import MessageOfBOD, Notice, Program
+from .models import MessageOfBOD, Notices, Programs
 
 admin.site.register(MessageOfBOD)
-admin.site.register(Notice)
-admin.site.register(Program)
+admin.site.register(Notices)
+admin.site.register(Programs)
 
-from .models import Service
+from .models import Services
 
-admin.site.register(Service)
+admin.site.register(Services)

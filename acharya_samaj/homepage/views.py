@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from django.conf import settings
 
-from .models import Slider, MessageOfBOD, Notice, Program, Service
+from .models import Slider, MessageOfBOD, Notices, Programs, Services
 
 # from django.shortcuts import redirect
 # from django.utils.translation import activate, LANGUAGE_SESSION_KEY
@@ -14,8 +14,8 @@ from .models import Slider, MessageOfBOD, Notice, Program, Service
 def index(request):
     return render(request, 'homepage/home.html',{
         "slides": Slider.objects.all(),
-        "notices": Notice.objects.all(),
-        "programs": Program.objects.all()
+        "notices": Notices.objects.all(),
+        "programs": Programs.objects.all()
     })
 
 
@@ -26,20 +26,20 @@ def contact(request):
 def home(request):
     return render(request, 'homepage/home.html',{
         "slides": Slider.objects.all(),
-        "notices": Notice.objects.all(),
-        "programs": Program.objects.all()
+        "notices": Notices.objects.all(),
+        "programs": Programs.objects.all()
     })
 
 
 def notice(request):
     return render(request, 'homepage/notice.html',{
-        "notices": Notice.objects.all()
+        "notices": Notices.objects.all()
     })
 
 
 def about(request):
     return render(request, 'homepage/about.html',{
-        "abouts": Service.objects.all()
+        "abouts": Services.objects.all()
     })
 
 
