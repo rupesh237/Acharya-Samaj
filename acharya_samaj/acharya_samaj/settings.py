@@ -36,6 +36,7 @@ LOGIN_REDIRECT_URL = '/admin/'
 # Application definition
 
 INSTALLED_APPS = [
+    'tinymce',
     'homepage',
     'rest_framework',
     'django.contrib.admin',

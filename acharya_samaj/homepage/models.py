@@ -1,10 +1,11 @@
 from django.db import models
+from tinymce import models as tinymce_model
 
 # Create your models here.
 
 class Slider(models.Model):
-    title= models.CharField(max_length=60, blank=True)
-    description= models.CharField(max_length=1000, blank=True)
+    title= models.CharField(max_length=200, blank=True)
+    description= tinymce_model.HTMLField(blank=True)
     images= models.ImageField(upload_to='slider/images/%d', blank=False)
 
     def __str__(self):
@@ -12,9 +13,9 @@ class Slider(models.Model):
 
 
 class Programs(models.Model):
-    title= models.CharField(max_length=100, blank=False)
-    description= models.CharField(blank=False, max_length=5000)
-    images=models.ImageField(blank=True)
+    title= models.CharField(max_length=200, blank=False)
+    description= tinymce_model.HTMLField(blank=False)
+    images=models.ImageField(blank=True, upload_to='Programs/images/')
     video_file= models.FileField(upload_to='programs/video/%d', blank=True)
 
     def __str__(self):
@@ -23,7 +24,7 @@ class Programs(models.Model):
 
 class Notices(models.Model):
     title= models.CharField(max_length=100, blank=False)
-    description= models.CharField(blank=False, max_length=5000)
+    description= tinymce_model.HTMLField(blank=False)
     images=models.ImageField(blank=True, upload_to='notices/images/')
     video_file= models.FileField(upload_to='notices/videos/%d', blank=True)
 
@@ -34,7 +35,7 @@ class Notices(models.Model):
 class MessageOfBOD(models.Model):
     post= models.CharField(max_length=30, blank=False)
     name= models.CharField(max_length=50, blank=False)
-    message= models.CharField(max_length=1500, blank=False)
+    message= tinymce_model.HTMLField(blank=False)
     photo= models.ImageField(upload_to='MessageBOD/photo/', blank=False)
     video= models.FileField(upload_to='MessageBOD/video/', blank=True)
 
@@ -44,7 +45,7 @@ class MessageOfBOD(models.Model):
 
 class Services(models.Model):
     title= models.CharField(max_length=60, blank=False)
-    description= models.CharField(max_length=2000)
+    description= tinymce_model.HTMLField(blank=False)
     images= models.ImageField(upload_to='Services/images/', blank=True)
     videos= models.FileField(upload_to='Services/video/', blank=True)
 

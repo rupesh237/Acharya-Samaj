@@ -24,5 +24,6 @@ admin.site.site_header='Acharya-Samaaj'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('homepage/', include('homepage.urls')),
+    path('tinymce/', include('tinymce.urls')),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
