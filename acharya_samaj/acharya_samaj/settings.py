@@ -147,28 +147,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
-# tinymce settings
-TINYMCE_DEFAULT_CONFIG = {
-    'height': 360,
-    'width': '100%',
-    'cleanup_on_startup': True,
-    'custom_undo_redo_levels': 20,
-    'selector': 'textarea',
-    'theme': 'silver',
-    'plugins': '''
-        textcolor save link image imagetools media preview codesample contextmenu
-        table code lists fullscreen  insertdatetime  nonbreaking
-        contextmenu directionality searchreplace wordcount visualblocks
-        visualchars code fullscreen autolink lists  charmap print  hr
-        anchor pagebreak
-        ''',
-    'toolbar': '''
-        undo redo | styleselect | bold italic | link image media | codesample |
-        alignleft aligncenter alignright alignjustify | outdent indent |
-        numlist bullist | forecolor backcolor | fullscreen
-        ''',
-    'contextmenu': 'formats | link image',
-    'menubar': True,
-    'statusbar': True,
-}
