@@ -36,7 +36,7 @@ LOGIN_REDIRECT_URL = '/admin/'
 # Application definition
 
 INSTALLED_APPS = [
-    'tinymce',
+    'ckeditor',
     'homepage',
     'rest_framework',
     'django.contrib.admin',
